@@ -1,0 +1,152 @@
+<html lang="en" >
+<head>
+    <title>App Engine Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="angular-material.min.css">
+</head>
+<md-content ng-app="MyApp" ng-cloak>
+<!--
+  Your HTML content here
+-->
+
+<!-- Angular Material requires Angular.js Libraries -->
+<script src="angular.min.js"></script>
+<script src="angular-animate.min.js"></script>
+<script src="angular-aria.min.js"></script>
+<script src="angular-messages.min.js"></script>
+
+<!-- Angular Material Library -->
+<script src="angular-material.min.js"></script>
+<script src="https://apis.google.com/js/api.js"></script>
+
+<!-- Your application bootstrap  -->
+<script type="text/javascript" src ="main.js"></script>
+
+
+
+
+<div ng-controller="AppCtrl" layout="column" class="inputdemoErrors">
+    <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding="" layout="row" class="md-subheader-content" style="">
+   <div style="margin-left:80%">
+    <button id="authorize-button" style="display: none;">Authorize</button>
+    <button id="signout-button" style="display: none;">Sign Out</button>
+   </div>
+        <div id="profile" style="margin-left:80%">
+            <b class="name"  ng-bind="userInfo.ig"></b><br/>
+            <i class="email" ng-bind="userInfo.U3"></i>
+        </div>
+    </md-content>
+    <md-content layout-padding="">
+        <form name="projectForm">
+
+            <md-input-container class="md-block">
+                <label>Description</label>
+                <input md-maxlength="30" required="" md-no-asterisk="" name="description" ng-model="project.description">
+                <div ng-messages="projectForm.description.$error" md-auto-hide="true">
+                    <div ng-message="required">This is required.</div>
+                    <div ng-message="md-maxlength">The description must be less than 30 characters long.</div>
+                </div>
+            </md-input-container>
+
+            <div layout="row">
+                <md-input-container flex="50">
+                    <label>Client Name</label>
+                    <input required="" name="clientName" ng-model="project.clientName">
+                    <div ng-messages="projectForm.clientName.$error" md-auto-hide="true">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container flex="50">
+                    <label>Project Type</label>
+                    <md-select name="type" ng-model="project.type" required="">
+                        <md-option value="App">Application</md-option>
+                        <md-option value="Web">Website</md-option>
+                        <md-option value="SomethingAwesome">Cool Stuff</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+            <md-input-container class="md-block">
+                <label>Client Email</label>
+                <input required="" type="email" name="clientEmail" ng-model="project.clientEmail" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/">
+
+                <div ng-messages="projectForm.clientEmail.$error" role="alert">
+                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                        Your email must be between 10 and 100 characters long and look like an e-mail address.
+                    </div>
+                </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>Hourly Rate (USD)</label>
+                <input required="" type="number" step="any" name="rate" ng-model="project.rate" min="800" max="4999" ng-pattern="/^1234$/">
+
+                <div ng-messages="projectForm.rate.$error" multiple="" md-auto-hide="true">
+                    <div ng-message="required">
+                        You've got to charge something! You can't just <b>give away</b> a Missile Defense
+                        System.
+                    </div>
+
+                    <div ng-message="min">
+                        You should charge at least $800 an hour. This job is a big deal... if you mess up,
+                        everyone dies!
+                    </div>
+
+                    <div ng-message="pattern">
+                        You should charge exactly $1,234.
+                    </div>
+
+                    <div ng-message="max">
+                        {{projectForm.rate.$viewValue | currency:"$":0}} an hour? That's a little ridiculous. I
+                        doubt even Bill Clinton could afford that.
+                    </div>
+                </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <md-checkbox name="tos" ng-model="project.tos" required="">
+                    I accept the terms of service.
+                </md-checkbox>
+                <div ng-messages="projectForm.tos.$error" multiple="" md-auto-hide="true">
+                    <div ng-message="required">
+                        You must accept the terms of service before you can proceed.
+                    </div>
+                </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <md-switch class="md-primary" name="special" ng-model="project.special" required="">
+                    Enable special options.
+                </md-switch>
+                <div ng-messages="projectForm.special.$error" multiple="" md-auto-hide="true">
+                    <div ng-message="required">
+                        You must enable all special options before you can proceed.
+                    </div>
+                </div>
+            </md-input-container>
+            <div>
+                <md-button class="md-raised" type="submit" ng-click="submit()">Submit</md-button>
+            </div>
+                <div>
+                    <a href="https://docs.google.com/a/google.com/spreadsheets/d/1MyPIjWxlr5Yxr8QCVg5ZrgxZlwHFrAnW_AefOBwPLlk/edit?usp=sharing" target="_blank"><md-button class="md-raised md-primary" >
+                        View SpreadSheet
+                </md-button></a>
+                </div>
+
+        </form>
+    </md-content>
+
+
+
+
+
+
+</div>
+<!--
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that can be foundin the LICENSE file at http://material.angularjs.org/HEAD/license.
+-->
+</body>
+</html>
